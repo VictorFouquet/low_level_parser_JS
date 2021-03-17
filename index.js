@@ -26,13 +26,19 @@ const str = s => (parserState) => {
         return parserState;
     }
 
+    const slicedTarget = targetString.slice(index);
+
+    if (slicedTarget.length === 0) {
+        return updateParserError(parserState, `str: Unexpected end of input.`)
+    }
+
     if (targetString.slice(index).startsWith(s)) {
         return updateParserState(parserState, index + s.length, s)
     }
 
     return updateParserError(
         parserState,
-        `Tried to match ${s}, but go ${targetString.slice(index, index + 10)}`
+        `str : Tried to match ${s}, but go ${targetString.slice(index, index + 10)}`
     );
 }
 
